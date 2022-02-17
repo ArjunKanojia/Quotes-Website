@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Motivation Adaa|Quotes Fund  </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
+
+    <style>
+        .main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 50px auto;
+            height: 70vh;
+            width: 600px;
+            border: 1px solid black;
+            background-color: #047aed;
+        }
+        .quotes{
+            border: 2px solid black;
+            border-radius: 20px;
+            width: 400px;
+            height: 350px;
+            background-color: whitesmoke;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2)
+
+        }
+       .btn{
+           display: flex;
+       }
+       .text{
+
+           width: 300px;
+           height: 100px;
+           
+           /* display: flex; */
+           
+           margin: 80px auto;
+           font-family: 'Oswald', sans-serif;
+           font-weight: bolder;
+           font-size: large;
+       }
+      .icon{
+          display: flex;
+          justify-content: space-between;
+      }
+      .tweet{
+          cursor: pointer;
+      
+          padding: 7px 30px;
+          
+          opacity: 0.6;
+      }
+      .left{
+        padding: 7px 30px;
+      }
+      .btn {
+          margin: 2px 156px;
+          /* border-radius: 5px; */
+          
+      }
+      button{
+          background-color: #047aed;
+          cursor: pointer;
+    
+    color: white;
+    border: none;
+    border-radius: 5px;
+    border: 2px solid white;
+      }
+      button:hover{
+    transform: scale(.98);
+}
+
+    </style>
+
+</head>
+<body>
+    <div class="main">
+        <div class=" quotes">
+            <div class="icon">
+            <i class="fas fa-quote-left fa-3x left"></i>
+            <i class="fab fa-twitter-square fa-2x tweet" id="n"></i>
+        </div>
+        <div class="text ">
+            <div  id="a"> click on Button</div>
+            <div class="author" id="b"></div>
+        </div>
+            
+            
+        <div class="btn" id="btn">
+            <button>  new Quotes</button>
+        </div>
+        </div>
+
+    </div>
+    <script>
+        const quotes = document.getElementById("a")
+        const auth = document.getElementById("b")
+
+         let newdata =''  ;// taki har jgah use kr ske
+         let quotesdata = '';
+         const getnewquotes = ()=>{
+           
+             let num  = Math.floor(Math.random()*1643);
+             quotesdata = newdata[num]
+             console.log(newdata[num].text)
+             quotes.innerHTML = `${newdata[num].text}`
+             console.log(newdata[num].author)
+             auth.innerHTML = `-${newdata[num].author}`
+         }
+         const newinsta = ()=>{
+             let post = `https://twitter.com/intent/tweet?text=${quotesdata.text}`
+             window.open(post)
+         }
+        const getquotes = async()=>{
+            const api  = "https://type.fit/api/quotes";
+            try{
+                let data = await fetch(api);
+                newdata =  await data.json(); 
+                const btn = document.getElementById('btn')
+                btn.addEventListener('click', getnewquotes)
+         const newbtn = document.getElementById('n')
+
+               
+                newbtn.addEventListener('click',newinsta)
+               
+                // console.log(newdata[0].author)
+
+            }
+            catch(error){
+
+            }
+        }
+        getquotes();
+        
+    </script>
+    
+</body>
+</html>
